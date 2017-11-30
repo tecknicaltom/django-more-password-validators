@@ -6,57 +6,6 @@ from more_password_validators import validators
 from unittest import TestCase
 
 
-class TestLengthValidatorTests(TestCase):
-
-    def test_length_validator_explicit_minimum(self):
-        lv = validators.LengthValidator(min_length=8, max_length=None)
-
-        # these should all fail validation
-        badstrings = '', '1', '1234567', '$%ǟ^&*('
-        for bad in badstrings:
-            with self.assertRaises(ValidationError):
-                lv.validate(bad)
-
-        # these should all pass validation
-        goodstrings = '12345678', '^@$%()ǟ^&$@%ǟ_(^$%@ǟ\'\')'
-        for good in goodstrings:
-            lv.validate(good)
-
-    def test_length_validator_zero_minimum(self):
-        lv = validators.LengthValidator(min_length=0, max_length=None)
-        lv.validate('')
-
-    def test_length_validator_no_minimum(self):
-        lv = validators.LengthValidator(min_length=None, max_length=None)
-        lv.validate('')
-
-    def test_length_validator_explicit_maximum(self):
-        lv = validators.LengthValidator(min_length=None, max_length=8)
-
-        # these should all pass validation
-        goodstrings = '', '1', '1234567', '$%ǟ^&*('
-        for good in goodstrings:
-            lv.validate(good)
-
-        # these should all fail validation
-        badstrings = '123456789', '^@$%()ǟ^&$@%ǟ_(^$%@ǟ\'\')'
-        for bad in badstrings:
-            with self.assertRaises(ValidationError):
-                lv.validate(bad)
-
-    def test_length_validator_zero_maximum(self):
-        lv = validators.LengthValidator(min_length=None, max_length=0)
-        # no problems here
-        lv.validate('')
-
-        with self.assertRaises(ValidationError):
-            lv.validate('longer than zero chars')
-
-    def test_length_validator_no_maximum(self):
-        lv = validators.LengthValidator(min_length=None, max_length=None)
-        lv.validate('any length is fine')
-
-
 class ValidatorTestCase(TestCase):
 
     def assertValid(self, validator, string):

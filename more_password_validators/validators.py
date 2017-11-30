@@ -25,10 +25,6 @@ COMMON_SEQUENCES = [
 ]
 
 # Settings
-PASSWORD_MIN_LENGTH = getattr(
-    settings, "PASSWORD_MIN_LENGTH", 6)
-PASSWORD_MAX_LENGTH = getattr(
-    settings, "PASSWORD_MAX_LENGTH", None)
 PASSWORD_DICTIONARY = getattr(
     settings, "PASSWORD_DICTIONARY", None)
 PASSWORD_MATCH_THRESHOLD = getattr(
@@ -37,25 +33,6 @@ PASSWORD_COMMON_SEQUENCES = getattr(
     settings, "PASSWORD_COMMON_SEQUENCES", COMMON_SEQUENCES)
 PASSWORD_COMPLEXITY = getattr(
     settings, "PASSWORD_COMPLEXITY", None)
-
-
-class LengthValidator(object):
-    message = _("Invalid Length (%s)")
-    code = "length"
-
-    def __init__(self, min_length=None, max_length=None):
-        self.min_length = min_length
-        self.max_length = max_length
-
-    def validate(self, password, user=None):
-        err = None
-        if self.min_length is not None and len(password) < self.min_length:
-            err = _("Must be %s characters or more") % self.min_length
-        elif self.max_length is not None and len(password) > self.max_length:
-            err = _("Must be %s characters or less") % self.max_length
-
-        if err is not None:
-            raise ValidationError(self.message % err, code=self.code)
 
 
 class ComplexityValidator(object):
@@ -185,7 +162,6 @@ class CommonSequenceValidator(BaseSimilarityValidator):
     code = "common_sequence"
 
 
-validate_length = LengthValidator(PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH)
 complexity = ComplexityValidator(PASSWORD_COMPLEXITY)
 dictionary_words = DictionaryValidator(dictionary=PASSWORD_DICTIONARY)
 common_sequences = CommonSequenceValidator(PASSWORD_COMMON_SEQUENCES)
