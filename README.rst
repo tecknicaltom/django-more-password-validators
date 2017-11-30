@@ -1,18 +1,24 @@
-.. image:: https://travis-ci.org/dstufft/django-passwords.svg?branch=master
-    :target: https://travis-ci.org/dstufft/django-passwords
+.. image:: https://travis-ci.org/tecknicaltom/django-more-password-validators.svg?branch=master
+    :target: https://travis-ci.org/tecknicaltom/django-more-password-validators
+<!--
 .. image:: https://img.shields.io/pypi/v/django-passwords.svg
     :target: https://pypi.python.org/pypi/django-passwords/
 .. image:: https://img.shields.io/pypi/dm/django-passwords.svg
     :target: https://pypi.python.org/pypi/django-passwords/
 .. image:: https://img.shields.io/pypi/l/django-passwords.svg
     :target: https://pypi.python.org/pypi/django-passwords/
+-->
 
 
+Django More Password Validators
 Django Passwords
 ================
 
-django-passwords is a reusable app that provides a form field and
-validators that check the strength of a password.
+django-more-password-validators is a reusable app that provides additional
+validators for passwords using Django 1.9+. It is a fork of based on the
+validators implemented by [django-passwords](https://github.com/dstufft/django-passwords).
+
+The below text has not yet been updated.
 
 Installation
 ------------

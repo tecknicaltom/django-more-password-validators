@@ -1,21 +1,21 @@
 from setuptools import setup
 
 setup(
-    name="django-passwords",
+    name="django-more-password-validators",
     version=__import__("passwords").__version__,
-    author="Donald Stufft",
-    author_email="donald@e.vilgeni.us",
-    description=("A Django reusable app that provides validators and a form "
-                 "field that checks the strength of a password"),
+    author="Tom Samstag",
+    author_email="tsamstag@securityinnovation.com",
+    description=("A Django reusable app that provides additional password "
+                 "validators"),
     long_description=open("README.rst").read(),
-    url="http://github.com/dstufft/django-passwords/",
+    url="http://github.com/tecknicaltom/django-more-password-validators/",
     license="BSD",
     packages=[
         "passwords",
     ],
     include_package_data=True,
     install_requires = [
-        "Django >= 1.3",
+        "Django >= 1.9",
     ],
     classifiers = [
         "Development Status :: 4 - Beta",
