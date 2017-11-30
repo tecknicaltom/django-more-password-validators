@@ -6,10 +6,7 @@ import re
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
-try:
-    from django.utils.encoding import smart_text
-except ImportError:  # django < 1.4.2
-    from django.utils.encoding import smart_unicode as smart_text
+from django.utils.encoding import smart_text
 
 
 COMMON_SEQUENCES = [
@@ -50,11 +47,11 @@ class LengthValidator(object):
         self.min_length = min_length
         self.max_length = max_length
 
-    def __call__(self, value):
+    def validate(self, password, user=None):
         err = None
-        if self.min_length is not None and len(value) < self.min_length:
+        if self.min_length is not None and len(password) < self.min_length:
             err = _("Must be %s characters or more") % self.min_length
-        elif self.max_length is not None and len(value) > self.max_length:
+        elif self.max_length is not None and len(password) > self.max_length:
             err = _("Must be %s characters or less") % self.max_length
 
         if err is not None:
@@ -68,14 +65,14 @@ class ComplexityValidator(object):
     def __init__(self, complexities):
         self.complexities = complexities
 
-    def __call__(self, value):
+    def validate(self, password, user=None):
         if self.complexities is None:
             return
 
         uppercase, lowercase, letters = set(), set(), set()
         digits, special = set(), set()
 
-        for character in value:
+        for character in password:
             if character.isupper():
                 uppercase.add(character)
                 letters.add(character)
@@ -87,7 +84,7 @@ class ComplexityValidator(object):
             elif not character.isspace():
                 special.add(character)
 
-        words = set(re.findall(r'\b\w+', value, re.UNICODE))
+        words = set(re.findall(r'\b\w+', password, re.UNICODE))
 
         errors = []
         if len(uppercase) < self.complexities.get("UPPER", 0):
@@ -153,10 +150,10 @@ class BaseSimilarityValidator(object):
             row1 = row2
         return min(row1)
 
-    def __call__(self, value):
+    def validate(self, password, user=None):
         for haystack in self.haystacks:
-            distance = self.fuzzy_substring(value, haystack)
-            longest = max(len(value), len(haystack))
+            distance = self.fuzzy_substring(password, haystack)
+            longest = max(len(password), len(haystack))
             similarity = (longest - distance) / longest
             if similarity >= self.threshold:
                 raise ValidationError(

@@ -2,7 +2,7 @@
 
 from __future__ import unicode_literals
 from django.core.exceptions import ValidationError
-from passwords import validators
+from more_password_validators import validators
 from unittest import TestCase
 
 
@@ -15,20 +15,20 @@ class TestLengthValidatorTests(TestCase):
         badstrings = '', '1', '1234567', '$%ǟ^&*('
         for bad in badstrings:
             with self.assertRaises(ValidationError):
-                lv(bad)
+                lv.validate(bad)
 
         # these should all pass validation
         goodstrings = '12345678', '^@$%()ǟ^&$@%ǟ_(^$%@ǟ\'\')'
         for good in goodstrings:
-            lv(good)
+            lv.validate(good)
 
     def test_length_validator_zero_minimum(self):
         lv = validators.LengthValidator(min_length=0, max_length=None)
-        lv('')
+        lv.validate('')
 
     def test_length_validator_no_minimum(self):
         lv = validators.LengthValidator(min_length=None, max_length=None)
-        lv('')
+        lv.validate('')
 
     def test_length_validator_explicit_maximum(self):
         lv = validators.LengthValidator(min_length=None, max_length=8)
@@ -36,40 +36,40 @@ class TestLengthValidatorTests(TestCase):
         # these should all pass validation
         goodstrings = '', '1', '1234567', '$%ǟ^&*('
         for good in goodstrings:
-            lv(good)
+            lv.validate(good)
 
         # these should all fail validation
         badstrings = '123456789', '^@$%()ǟ^&$@%ǟ_(^$%@ǟ\'\')'
         for bad in badstrings:
             with self.assertRaises(ValidationError):
-                lv(bad)
+                lv.validate(bad)
 
     def test_length_validator_zero_maximum(self):
         lv = validators.LengthValidator(min_length=None, max_length=0)
         # no problems here
-        lv('')
+        lv.validate('')
 
         with self.assertRaises(ValidationError):
-            lv('longer than zero chars')
+            lv.validate('longer than zero chars')
 
     def test_length_validator_no_maximum(self):
         lv = validators.LengthValidator(min_length=None, max_length=None)
-        lv('any length is fine')
+        lv.validate('any length is fine')
 
 
 class ValidatorTestCase(TestCase):
 
     def assertValid(self, validator, string):
         # we test validationerror isn't raised by just running the validation.
-        validator(string)
+        validator.validate(string)
 
     def assertInvalid(self, validator, string, exc_re=None):
         if exc_re is None:
             with self.assertRaises(ValidationError):
-                validator(string)
+                validator.validate(string)
         else:
             with self.assertRaisesRegexp(ValidationError, exc_re):
-                validator(string)
+                validator.validate(string)
 
 
 class ComplexityValidatorTests(ValidatorTestCase):
