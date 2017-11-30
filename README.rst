@@ -13,7 +13,7 @@ Django More Password Validators
 
 django-more-password-validators is a reusable app that provides additional
 validators for passwords using Django 1.9+. It is a fork of based on the
-validators implemented by [django-passwords](https://github.com/dstufft/django-passwords).
+validators implemented by `django-passwords <https://github.com/dstufft/django-passwords>`_.
 
 The below text has not yet been updated.
 
