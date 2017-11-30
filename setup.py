@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="django-more-password-validators",
-    version=__import__("passwords").__version__,
+    version=__import__("more_password_validators").__version__,
     author="Tom Samstag",
     author_email="tsamstag@securityinnovation.com",
     description=("A Django reusable app that provides additional password "
@@ -11,7 +11,7 @@ setup(
     url="http://github.com/tecknicaltom/django-more-password-validators/",
     license="BSD",
     packages=[
-        "passwords",
+        "more_password_validators",
     ],
     include_package_data=True,
     install_requires = [

@@ -51,4 +51,4 @@ deploy:
     secure: NoM2NEezIgizj/Q8JeezHKDDNzYsJCEBGIVJ3gAqSIhsq71hWBiA5coautBq214zIXR9P8WlX5ZzEvdEiZJc/u6jgL9Ggp2YOsi5fjGqbAdiGvlPd6lAfgnlbdNqJgjkTEckktiQEmiZYmZGz8tE57In7+BDIuxEg2QWX9eQ21E=
   on:
     tags: true
-    repo: dstufft/django-passwords
+    repo: tecknicaltom/django-more-password-validators
