@@ -1,13 +1,11 @@
 .. image:: https://travis-ci.org/tecknicaltom/django-more-password-validators.svg?branch=master
     :target: https://travis-ci.org/tecknicaltom/django-more-password-validators
-<!--
-.. image:: https://img.shields.io/pypi/v/django-passwords.svg
+.. .. image:: https://img.shields.io/pypi/v/django-passwords.svg
     :target: https://pypi.python.org/pypi/django-passwords/
-.. image:: https://img.shields.io/pypi/dm/django-passwords.svg
+.. .. image:: https://img.shields.io/pypi/dm/django-passwords.svg
     :target: https://pypi.python.org/pypi/django-passwords/
-.. image:: https://img.shields.io/pypi/l/django-passwords.svg
+.. .. image:: https://img.shields.io/pypi/l/django-passwords.svg
     :target: https://pypi.python.org/pypi/django-passwords/
--->
 
 
 Django More Password Validators
